@@ -1,0 +1,21 @@
+http:
+  port: 9000
+  adminPort: 9001
+
+database:
+  driverClass: org.mariadb.jdbc.Driver
+
+  user: username
+
+  password: password
+
+  url: jdbc:mariadb:sequential://127.0.0.1/babysteps?createDatabaseIfNotExist=true
+
+  properties:
+    charSet: UTF-8
+
+  # the SQL query to run when validating a connection's liveness
+  validationQuery: "/* MyService Health Check */ SELECT 1"
+
+swagger:
+  resourcePackage: com.bobbydixit.babysteps.resources
