@@ -12,6 +12,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.validator.constraints.NotEmpty;
 
 @Data
 @EqualsAndHashCode(callSuper = true)
@@ -20,17 +21,21 @@ import lombok.Setter;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class AppConfig extends Configuration {
 
-  @NotNull
-  @Valid
-  private SwaggerBundleConfiguration swagger = new SwaggerBundleConfiguration();
+
+  @JsonProperty("swagger")
+  public SwaggerBundleConfiguration swaggerBundleConfiguration;
+
 
   @Valid
   @NotNull
   @JsonProperty("database")
-  private DataSourceFactory database = new DataSourceFactory();
+  private DataSourceFactory database;
 
   public DataSourceFactory getDataSourceFactory() {
     return database;
   }
 
+  public void setDataSourceFactory(DataSourceFactory dataSourceFactory) {
+    this.database = dataSourceFactory;
+  }
 }

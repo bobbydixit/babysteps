@@ -21,26 +21,19 @@ public class App extends Application<AppConfig> {
       return configuration.getDataSourceFactory();
     }
   };
-
+//
   @Override
   public void initialize(Bootstrap<AppConfig> bootstrap) {
 
     bootstrap.addBundle(hibernateBundle);
-
+//
     bootstrap.addBundle(new MigrationsBundle<AppConfig>() {
       public DataSourceFactory getDataSourceFactory(AppConfig configuration) {
         return configuration.getDataSourceFactory();
       }
     });
-
+//
     bootstrap.addBundle(HystrixBundle.withDefaultSettings());
-
-    bootstrap.addBundle(new MigrationsBundle<AppConfig>() {
-      public DataSourceFactory getDataSourceFactory(AppConfig configuration) {
-        return configuration.getDataSourceFactory();
-      }
-    });
-
   }
 
   @Override
@@ -49,8 +42,12 @@ public class App extends Application<AppConfig> {
 
   }
 
+  @Override
+  public String getName() {
+    return "app";
+  }
+
   public static void main(String[] args) throws Exception {
-    App babySteps = new App();
-    babySteps.run(args);
+    new App().run(args);
   }
 }
